@@ -4,12 +4,17 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .crud_routes import router as beans_router
 from .db import init_db
+from .seed import seed_if_empty
 from .suggest_routes import router as suggest_router
 
 # Create tables on import so the on-disk SQLite DB is always ready — this runs
 # under uvicorn, under the TestClient, and on any direct import. create_all is
 # idempotent, so it's safe to call every startup; existing data is untouched.
 init_db()
+
+# Seed demo beans when the table is empty. On Vercel's ephemeral /tmp SQLite this
+# repopulates after each cold start; on a persistent DATABASE_URL it seeds once.
+seed_if_empty()
 
 app = FastAPI(title="Coffee Bean Zine")
 
