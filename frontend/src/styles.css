@@ -1,32 +1,39 @@
 /* ============================================================
    The Daily Grind — editorial coffee-zine design tokens
    Type:  Newsreader (display serif) / Public Sans (body) / Space Mono (data)
-   Color: ink on warm paper, ONE accent = coffee-cherry red
+   Color: cream ink on dark espresso, ONE accent = coffee-cherry red
    ============================================================ */
 :root {
-  --paper: #f6f1e7;
-  --paper-2: #efe7d6;
-  --ink: #1c1a17;
-  --ink-soft: #514c44;
-  --rule: #cabfa6;
-  --cherry: #c02a1b;       /* the single saturated accent */
-  --cherry-deep: #8f1d12;
-  --gold: #b98a2e;         /* star fill */
+  color-scheme: dark;
+
+  --paper: #171009;        /* espresso night — app background */
+  --paper-2: #241a10;
+  --card: #201710;         /* zine page + modal surface */
+  --card-2: #2a1e13;       /* inputs on a card */
+  --ink: #f0e6d2;          /* cream */
+  --ink-soft: #b5a488;
+  --rule: #4d3c29;
+  --cherry: #e05a3a;       /* the single saturated accent */
+  --cherry-deep: #b23a20;
+  --gold: #dfae4f;         /* star fill */
 
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --body: "Public Sans", system-ui, sans-serif;
   --mono: "Space Mono", ui-monospace, monospace;
 
   --page-w: 1080px;
-  --shadow: 0 18px 40px -22px rgba(28, 26, 23, 0.55);
+  --shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.8);
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
+  /* scattered coffee beans (inline SVG) over warm coffee-toned gradients */
   background:
-    radial-gradient(circle at 20% -10%, #fbf7ee, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23c99e63' stroke-width='2' stroke-opacity='.09'%3E%3Cg transform='translate(46 52) rotate(-28)'%3E%3Cellipse rx='11' ry='16'/%3E%3Cpath d='M0 -14 C6 -7 -6 7 0 14'/%3E%3C/g%3E%3Cg transform='translate(158 160) rotate(22)'%3E%3Cellipse rx='11' ry='16'/%3E%3Cpath d='M0 -14 C6 -7 -6 7 0 14'/%3E%3C/g%3E%3Cg transform='translate(170 48) rotate(64)'%3E%3Cellipse rx='8' ry='12'/%3E%3Cpath d='M0 -10 C4 -5 -4 5 0 10'/%3E%3C/g%3E%3Cg transform='translate(36 156) rotate(-66)'%3E%3Cellipse rx='8' ry='12'/%3E%3Cpath d='M0 -10 C4 -5 -4 5 0 10'/%3E%3C/g%3E%3Cg transform='translate(108 104) rotate(8)'%3E%3Cellipse rx='9' ry='14'/%3E%3Cpath d='M0 -12 C5 -6 -5 6 0 12'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 20% -10%, #2e1d0e, transparent 60%),
+    radial-gradient(circle at 85% 110%, #26150a, transparent 55%),
     var(--paper);
   color: var(--ink);
   font-family: var(--body);
@@ -114,7 +121,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   font-family: var(--body);
   font-size: 14px;
   border: 1px solid var(--rule);
-  background: #fffdf8;
+  background: var(--card-2);
   padding: 7px 10px;
   border-radius: 2px;
   color: var(--ink);
@@ -138,7 +145,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 }
 .page-wrap {
   position: relative;
-  background: #fffdf8;
+  background: var(--card);
   border: 1px solid var(--rule);
   box-shadow: var(--shadow);
   border-radius: 3px;
@@ -163,8 +170,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   border-radius: 0;
   transition: background 0.15s ease, color 0.15s ease;
 }
-.flip-zone:hover { background: linear-gradient(90deg, rgba(192,42,27,0.10), transparent); color: var(--cherry); }
-.flip-zone.right:hover { background: linear-gradient(270deg, rgba(192,42,27,0.10), transparent); }
+.flip-zone:hover { background: linear-gradient(90deg, rgba(224,90,58,0.12), transparent); color: var(--cherry); }
+.flip-zone.right:hover { background: linear-gradient(270deg, rgba(224,90,58,0.12), transparent); }
 .flip-zone.left { left: 0; cursor: w-resize; }
 .flip-zone.right { right: 0; cursor: e-resize; }
 .flip-zone:disabled { opacity: 0.25; cursor: default; }
@@ -274,7 +281,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   text-transform: uppercase;
   color: var(--ink-soft);
 }
-.freshness.fresh { color: #2f7d4f; }
+.freshness.fresh { color: #6fbf8b; }
 .freshness.stale { color: var(--cherry); }
 
 /* low-stock badge */
@@ -297,7 +304,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(28, 26, 23, 0.55);
+  background: rgba(0, 0, 0, 0.65);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -306,8 +313,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   z-index: 50;
 }
 .modal {
-  background: #fffdf8;
-  border: 1px solid var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
   box-shadow: var(--shadow);
   border-radius: 3px;
   width: 100%;
@@ -350,7 +357,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   font-family: var(--body);
   font-size: 14px;
   border: 1px solid var(--rule);
-  background: #fff;
+  background: var(--card-2);
   padding: 8px 10px;
   border-radius: 2px;
   color: var(--ink);
@@ -368,11 +375,11 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .brew-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
 .brew-row input {
   width: 110px; font-family: var(--body); font-size: 14px;
-  border: 1px solid var(--rule); background: #fff; padding: 8px 10px; border-radius: 2px;
+  border: 1px solid var(--rule); background: var(--card-2); padding: 8px 10px; border-radius: 2px;
 }
 .detail-notes {
   font-family: var(--serif); font-size: 15px; color: var(--ink);
-  border: 1px solid var(--rule); background: #fff; padding: 10px; border-radius: 2px;
+  border: 1px solid var(--rule); background: var(--card-2); padding: 10px; border-radius: 2px;
   resize: vertical;
 }
 
@@ -385,12 +392,12 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 0;
 }
 .suggestion .s-byline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin: 2px 0 6px; }
-.suggestion a { color: var(--cherry-deep); }
+.suggestion a { color: var(--cherry); }
 .why { font-family: var(--serif); font-style: italic; margin: 6px 0 0; }
 .citations { margin-top: 18px; border-top: 1px dashed var(--rule); padding-top: 10px; }
 .citations .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
 .citations ul { margin: 6px 0 0; padding-left: 18px; font-size: 12px; }
-.citations a { color: var(--cherry-deep); }
+.citations a { color: var(--cherry); }
 
 .empty {
   text-align: center;
@@ -410,9 +417,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .error-msg {
   font-family: var(--mono);
   font-size: 12px;
-  color: var(--cherry-deep);
-  background: rgba(192, 42, 27, 0.08);
-  border: 1px solid rgba(192, 42, 27, 0.3);
+  color: var(--cherry);
+  background: rgba(224, 90, 58, 0.10);
+  border: 1px solid rgba(224, 90, 58, 0.35);
   padding: 8px 10px;
   border-radius: 2px;
   margin-top: 10px;
