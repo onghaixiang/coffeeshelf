@@ -1,0 +1,22 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+
+# SQLite database (local data — not committed)
+backend/beans.db
+backend/beans.db-journal
+
+# Node / Vite
+node_modules/
+frontend/dist/
+
+# Env
+.env
+
+.vercel
+.env*
+
+# Local agent tooling (not part of the app)
+build-agent-skills/
+.claude/
